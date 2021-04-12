@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+<div id="app">
+    <!--字符串拼接-->
+    <h2>{{ msg + '您好' }}</h2>
+    <!--加1-->
+    <h2>{{ age+1 }}</h2>
+    <!--判断-->
+    <h2>{{ msg == 'Hello World' }}</h2>
+    <!--转大写-->
+    <h2>{{ msg.toUpperCase()}}</h2>
+
+    <h2>{{ age == 23 }}</h2>
+</div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",      // 指定vue作用的范围
+        data: {          // 给vue实例绑定一系列数据
+            msg: "Hello World",
+            age: 23
+        },
+    });
+</script>

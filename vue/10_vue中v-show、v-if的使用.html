@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+    <div id="app">
+        <!--
+            v-show与v-if
+            都是用来控制标签的显示与隐藏
+            v-show：通过css的display来控制的，当显示与隐藏切换频繁时推荐使用
+            v-if：直接操作DOM来控制的
+        -->
+        <h2 v-show="isShow">{{msg}}</h2>
+        <input type="button" value="显示" @click="show">
+        <input type="button" value="隐藏" @click="hide">
+        <input type="button" value="切换" @click="change">
+        <input type="button" value="切换,另一种写法" @click="isShow=!isShow">
+    </div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",         // 指定vue作用的范围
+        data: {             // 给vue实例绑定一系列数据
+            msg: "测试vue事件绑定v-on",
+            isShow:true,
+        },
+        methods: {          // 给vue实例绑定一系列方法
+            show() {
+                this.isShow = true;
+            },
+            hide(){
+                this.isShow = false;
+            },
+            change(){
+                this.isShow = !this.isShow;
+            }
+        }
+    });
+</script>

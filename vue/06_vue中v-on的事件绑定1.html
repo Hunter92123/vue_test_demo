@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{msg}}</h2>
+        <!--
+            事件三要素：
+            1， 事件源：事件的源头，一般为html标签
+            2， 事件：  事件类型，为单击，双击，鼠标抬起等待
+            3， 监听器：事件处理程序，事件处理函数 function(){}
+        -->
+        <!-- v-on:事件类型-->
+        <!-- 在vue中的事件处理函数同意声明在methods中-->
+        <input type="button" value="点我" v-on:click="aaa" v-on:mouseover="bbb" v-on:mouseout="ccc">
+    </div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",         // 指定vue作用的范围
+        data: {             // 给vue实例绑定一系列数据
+            msg: "测试vue事件绑定v-on",
+        },
+        methods: {          // 给vue实例绑定一系列方法
+            aaa: function(){
+                alert('aaa');
+            },
+            bbb:function (){
+                console.log("mouse over");
+            },
+            ccc:function (){
+                console.log("mouse out");
+            }
+        }
+    });
+</script>

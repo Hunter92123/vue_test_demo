@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{msg}}</h2>
+    </div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var data = {
+        msg:"Hello World",
+        user:{name:"小城", age:23}
+    };
+
+    var app = new Vue({
+        el:"#app",          // 指定vue作用的范围
+        data:data           // 给vue实例绑定一系列数据
+    });
+</script>

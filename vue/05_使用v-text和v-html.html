@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+    <div id="app" class="aa">
+        <!-- 使用{{}} -->
+        <h2>{{content}}</h2>
+        <!--使用v-text-->
+        <!--
+            {{}} 和 v-text 的取值区别：
+            1： {{}} 不会覆盖原有标签内的内容，而v-text会覆盖原有的内容
+            2： {{}} 网络不好的时候会出现插值闪烁， 而v-text不会出现插值闪烁
+        -->
+        <h2 v-text="content"></h2>
+
+        <!--
+            v-text和v-html：
+            共同点：都可以直接根据data中的属性名，将数据渲染到标签内容
+            不同点：v-text 将获取的数据以文本的方式渲染到标签内部，相当于js的innerText
+                    v-html 将获取的数据中含有html解析后渲染到标签内部， 相当于js的innerHtml
+        -->
+        <h2 v-html="content"></h2>
+    </div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",         // 指定vue作用的范围
+        data: {             // 给vue实例绑定一系列数据
+            msg: "Hello World",
+            content: "欢迎来到<a href='http://www.baidu.com'>百度</a>",
+        },
+    });
+</script>

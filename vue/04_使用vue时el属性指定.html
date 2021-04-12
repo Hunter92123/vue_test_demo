@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+    <div id="app" class="aa">
+        <h2>{{msg}}</h2>
+    </div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",         // 指定vue作用的范围
+                            // 书写格式：使用css选择器， id选择器、html选择器、类选择器。推荐使用id选择器，因为id具有唯一性
+                            // 注意事项：不要将el指向html或body标签，单独写一个div代替
+                            // Do not mount Vue to <html> or <body> - mount to normal elements instead.
+
+        data: {             // 给vue实例绑定一系列数据
+            msg: "Hello World",
+            age: 23
+        },
+    });
+</script>
