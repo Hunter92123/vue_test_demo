@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+<div id="app">
+
+    <h1>{{msg}}</h1>
+
+    <!--vue中的事件修饰符
+        .stop： 阻止冒泡，阻止事件向上级DOM元素传递
+        .prevent：阻止默认事件的发生
+        .self：将事件绑定到自身，只能自身才能出发，一般用于避免冒泡事件的影响
+        .once：设置事件只能触发一次，比如按钮的点击等
+    -->
+    <h2>.stop修饰符</h2>
+    <div style="width:200px;height:200px;background-color:red;" @click="parentClick">
+        <div style="width:100px;height:100px;background-color:green;" @click.stop="childClick"></div>
+        <div style="width:100px;height:100px;background-color:blue;" @click.stop="childClick"></div>
+    </div>
+    <h2>.prevent修饰符</h2>
+    <a href="http://www.baidu.com" @click.prevent="clickme">跳转</a>
+
+    <h2>.self修饰符</h2>
+    <div style="width:200px;height:200px;background-color:red;" @click.self="parentClick">
+        <div style="width:100px;height:100px;background-color:green;" @click="childClick"></div>
+        <div style="width:100px;height:100px;background-color:blue;" @click="childClick"></div>
+    </div>
+
+    <h2>.once修饰符</h2>
+    <input type="button" value="点我" @click.once="clickme">
+</div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: '事件修饰符',
+        },
+        methods: {
+            parentClick() {
+                alert('点击了parent');
+            },
+            childClick() {
+                alert('点击了child');
+            },
+            clickme() {
+                alert('点击了');
+            }
+        }
+    });
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+<div id="app">
+
+    <h1>{{msg}}</h1>
+
+    <!--v-model:用来将标签的value属性交给vue管理-->
+    请输入备忘内容： <input type="text" v-model="content"><input type="button" value="添加" @click="addItem">
+
+    <!--v-if v-show：用来控制标签显示或者隐藏-->
+    <ul v-show="items.length > 0">
+        <li v-for="item,index in items">
+            {{index+1}} {{item}} <a href="javascript:;" @click="deleteItem(index)">删除</a>
+        </li>
+    </ul>
+    <h5 v-show="items.length == 0">当前备忘录为空，请添加备忘内容！！</h5>
+
+    <span>共{{items.length}}条</span>
+    <input type="button" value="清空备忘录" @click="deleteAll">
+</div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: '备忘录',
+            items: ['今天记得买菜', '今天要好好学习'],
+            content: ''
+        },
+        methods: {
+            addItem() {
+                console.log(this.content);
+                if (!this.content) {
+                    alert("请输入备忘内容！");
+                    return;
+                }
+                this.items.push(this.content);
+                this.content = '';
+            },
+            deleteItem(index) {
+                this.items.splice(index, 1);
+            },
+            deleteAll() {
+                this.items = [];
+            }
+
+        }
+    });
+</script>

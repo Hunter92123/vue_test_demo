@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Axios测试</title>
+</head>
+<body>
+<div id="app">
+    <h1>Axios测试</h1>
+</div>
+</body>
+</html>
+<!--引入axios异步请求库-->
+<script src="js/axios.min.js"></script>
+
+<script>
+    /* axios的get请求*/
+    /*axios.get("http://localhost:8989/demo").then(function(response){
+        console.log(response.data);
+    });*/
+
+    /*axios.get("http://localhost:8989/demo1?id=23").then(function(response){
+        console.log(response.data);
+    });*/
+
+    /*axios.get("http://localhost:8989/findUserById?id=11").then(res=>{
+        console.log(res.data);
+    });*/
+
+    /* axios.get("http://localhost:8989/findUserById/11").then(res=>{
+         console.log(res.data);
+     });*/
+
+    /*axios post请求*/
+    /*axios.post("http://localhost:8989/save",{
+        name:"小王",
+        age:24,
+        bir:"2012-12-12"
+    }).then(res=>{
+        console.log(res.data);
+    });*/
+
+    /*axios并发请求 axios.all*/
+
+    function demo() {
+        return axios.get("http://localhost:8989/demo");
+    }
+
+    function save() {
+        return axios.post("http://localhost:8989/save", {
+            name: "小王",
+            age: 24,
+            bir: "2012-12-12"
+        });
+    }
+
+    /*axios 并发请求*/
+    axios.all([demo(), save()]).then(axios.spread((demoRes, saveRes) => {
+        console.log(demoRes.data);
+        console.log(saveRes.data);
+    }));
+</script>
