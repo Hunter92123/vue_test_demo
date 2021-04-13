@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+<div id="app">
+
+    <h1>{{msg}}</h1>
+
+    <!--直接使用组件名作为标签使用-->
+    <login title="欢迎" count="11" age="23"></login>
+
+</div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    /*定义一个局部组件*/
+    const login = {
+        template: "<div><h2>用户登录-{{count}}-{{age}}-{{title}}-{{loginTitle}}</h2></div>",
+        data() {
+            return {
+                loginTitle: this.title,
+            };
+        },
+        props: ['title', 'count', 'age'],
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: 'vue组件使用props传递数据',
+        },
+        methods: {},
+        computed: {   // 计算属性
+
+        },
+        components: {
+            login,  // 等价于 login:login
+        }
+    });
+</script>

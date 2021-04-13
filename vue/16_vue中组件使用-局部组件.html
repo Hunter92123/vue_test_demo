@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue测试</title>
+</head>
+<body>
+<div id="app">
+
+    <h1>{{msg}}</h1>
+
+    <!--直接使用组件名作为标签使用-->
+    <login></login>
+    <register></register>
+
+    <!--使用template定义组件的html内容-->
+    <template id="registerTemplate">
+        <div><h2>用户注册</h2></div>
+    </template>
+</div>
+</body>
+</html>
+<!--引入vue.js文件-->
+<script src="js/vue.js"></script>
+<script>
+    /*定义一个局部组件*/
+    const login = {
+        template: "<div><h2>用户登录</h2></div>"
+    }
+
+    /*通过id获取定义在template中的html内容*/
+    const register = {
+        template: "#registerTemplate"
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: 'vue组件-全局组件',
+        },
+        methods: {},
+        computed: {   // 计算属性
+
+        },
+        components: {
+            login,  // 等价于 login:login
+            register
+        }
+    });
+</script>
