@@ -11,6 +11,7 @@ public class User {
     private Integer age;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date bir;
+    private String desc;
 
     public User() {
     }
@@ -54,6 +55,14 @@ public class User {
         this.bir = bir;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -61,6 +70,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", bir=" + bir +
+                ", desc='" + desc + '\'' +
                 '}';
     }
 }

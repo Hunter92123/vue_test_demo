@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <title>注册页面</title>
+    <meta charset="UTF-8">
+    <style>
+        #app{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <div class="register1">
+        <span class="register1_1">用户注册</span>
+    </div>
+
+    <div class="register2">
+        <div class="ff">
+            <span class="register2_1">请输入用户名：</span>
+        </div>
+        <input type="text" v-model="user.userName">
+        <span>*</span>
+    </div>
+
+    <div class="register2">
+        <div class="ff">
+            <span class="register2_1">请输入真实姓名：</span>
+        </div>
+        <input type="text" v-model="user.realName">
+        <span>*</span>
+    </div>
+
+    <div class="register2">
+        <div class="ff">
+            <span class="register2_1">请选择性别：</span>
+        </div>
+        <input type="radio" value="1" v-model="user.sex">男
+        <input type="radio" value="0" v-model="user.sex">女
+    </div>
+
+    <div class="register3">
+        <div class="ff">
+            <span class="register3_1">请输入密码：</span>
+        </div>
+        <input type="password" v-model="user.password">
+        <span>*</span>
+    </div>
+
+    <div class="register4">
+        <div class="ff">
+            <span class="register4_1">验证码：</span>
+        </div>
+        <input type="text" v-model="code">
+        <img :src="src" alt="无图片">
+        <a href="" @click.prevent="getImageCode">重新生成</a>
+        <span>*</span>
+    </div>
+
+    <div class="register5">
+        <input type="button" value="注册" @click="register"/>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            src:'',
+            user:{
+                userName:'',
+                realName:'',
+                sex:'',
+                password:'',
+            },
+            code:'',
+        },
+        methods:{
+            getImageCode(){
+                var _this = this;
+                axios.get("http://localhost:8990/ems/user/t-user/getImageCode?time="+Math.random()).then(res=>{
+                    _this.src = res.data;
+                });
+            },
+            register(){
+                var _this = this;
+                console.log(this.user);
+                console.log(this.code);
+                axios.post("http://localhost:8990/ems/user/t-user/register?code="+this.code, {
+                    user: _this.user
+                }).then(res=>{
+                    console.log(res.data);
+                });
+            }
+        },
+        created(){
+            this.getImageCode();
+        }
+    });
+</script>

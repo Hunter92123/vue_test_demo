@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
+        #app{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div  class="login1">
+            <span class="login1_1">用户登录</span>
+        </div>
+        <div class="login2">
+            <span class="login2_1">用户名：</span>
+            <input type="text" name="username" id="usr" class="usr_name">
+        </div>
+
+        <div class="login3">
+            <span class="login3_1">密&nbsp;码：</span>
+            <input type="password" name="password" id="pwd" class="pass_word">
+        </div>
+
+        <div class="login4">
+            <span class="login4_1">验证码：</span>
+            <input type="text" id="input1" class="input_code">
+            <img :src="src" />
+            <a href="" @click.prevent="getImageCode">重新生成</a>
+        </div>
+
+        <div class="login5">
+            <input type="button" id="sumbitButton" value="登录" onclick="loginValidate()"/>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            src:'',
+        },
+        methods:{
+            getImageCode(){
+                var _this = this;
+                axios.get("http://localhost:8990/ems/user/getImageCode?time="+Math.random()).then(res=>{
+                    _this.src = res.data;
+                });
+            }
+        },
+        created(){
+            this.getImageCode();
+        }
+    });
+</script>
