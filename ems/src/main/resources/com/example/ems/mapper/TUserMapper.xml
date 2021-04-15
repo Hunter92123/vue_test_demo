@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ems.mapper.TUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.ems.entity.TUser">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="real_name" property="realName"/>
+        <result column="password" property="password"/>
+        <result column="sex" property="sex"/>
+        <result column="status" property="status"/>
+        <result column="register_datetime" property="registerDatetime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , user_name, real_name, password, sex, status, register_datetime
+    </sql>
+
+    <!--查询全表-->
+    <sql id="sql">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+    </sql>
+
+    <!--插入用户-->
+    <insert id="insert" parameterType="com.example.ems.entity.TUser">
+        insert into t_user value (#{id}, #{userName},#{realName},#{password}, #{sex}, #{status}, #{registerDatetime})
+    </insert>
+
+    <!--查询根据用户名查询用户列表-->
+    <select id="selectUserByUserName" resultType="com.example.ems.entity.TUser">
+        <include refid="sql"/>
+        where
+        <if test="userName != null">
+            user_name = #{userName}
+        </if>
+    </select>
+
+    <!--查询根据用户名和密码查询用户列表-->
+    <select id="selectUserByUserNameAndPassword" resultType="com.example.ems.entity.TUser">
+        <include refid="sql"/>
+        where
+        user_name = #{userName, jdbcType=VARCHAR}
+        and password = #{password, jdbcType=VARCHAR}
+    </select>
+
+</mapper>
