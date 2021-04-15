@@ -53,7 +53,7 @@
             <span class="register4_1">验证码：</span>
         </div>
         <input type="text" v-model="code">
-        <img :src="src" alt="无图片">
+        <img :src="src" alt="无图片" @click.prevent="getImageCode">
         <a href="" @click.prevent="getImageCode">重新生成</a>
         <span>*</span>
     </div>
@@ -70,31 +70,28 @@
 <script>
     const app = new Vue({
         el:"#app",
-        data:{
-            src:'',
-            user:{
-                userName:'',
-                realName:'',
-                sex:'',
-                password:'',
-            },
-            code:'',
+        data: {
+            src: '',
+            user: {},
+            code: '',
         },
         methods:{
             getImageCode(){
                 var _this = this;
-                axios.get("http://localhost:8990/ems/user/t-user/getImageCode?time="+Math.random()).then(res=>{
+                axios.get("http://localhost:8990/ems/user/getImageCode?time=" + Math.random()).then(res => {
                     _this.src = res.data;
                 });
             },
-            register(){
-                var _this = this;
-                console.log(this.user);
-                console.log(this.code);
-                axios.post("http://localhost:8990/ems/user/t-user/register?code="+this.code, {
-                    user: _this.user
-                }).then(res=>{
-                    console.log(res.data);
+            register() {
+                axios.post("http://localhost:8990/ems/user/register?code=" + this.code, this.user).then(res => {
+                    let flag = res.data.flag;
+                    let msg = res.data.msg;
+                    if (flag == 0) {
+                        //alert("提示：" + msg);
+                        window.location.href = "http://localhost:8990/ems/login.html";
+                    } else {
+                        alert("提示：" + msg);
+                    }
                 });
             }
         },

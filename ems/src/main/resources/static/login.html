@@ -16,23 +16,23 @@
         </div>
         <div class="login2">
             <span class="login2_1">用户名：</span>
-            <input type="text" name="username" id="usr" class="usr_name">
+            <input type="text" v-model="user.userName">
         </div>
 
         <div class="login3">
             <span class="login3_1">密&nbsp;码：</span>
-            <input type="password" name="password" id="pwd" class="pass_word">
+            <input type="password" v-model="user.password">
         </div>
 
         <div class="login4">
             <span class="login4_1">验证码：</span>
-            <input type="text" id="input1" class="input_code">
-            <img :src="src" />
+            <input type="text" v-model="code">
+            <img :src="src" alt="无图片" @click.prevent="getImageCode"/>
             <a href="" @click.prevent="getImageCode">重新生成</a>
         </div>
 
         <div class="login5">
-            <input type="button" id="sumbitButton" value="登录" onclick="loginValidate()"/>
+            <input type="button" value="登录" @click="login"/>
         </div>
     </div>
 
@@ -44,14 +44,27 @@
 <script>
     const app = new Vue({
         el:"#app",
-        data:{
-            src:'',
+        data: {
+            src: '',
+            user: {},
+            code: '',
         },
-        methods:{
-            getImageCode(){
+        methods: {
+            getImageCode() {
                 var _this = this;
-                axios.get("http://localhost:8990/ems/user/getImageCode?time="+Math.random()).then(res=>{
+                axios.get("http://localhost:8990/ems/user/getImageCode?time=" + Math.random()).then(res => {
                     _this.src = res.data;
+                });
+            },
+            login() {
+                axios.post("http://localhost:8990/ems/user/login?code=" + this.code, this.user).then(res => {
+                    let flag = res.data.flag;
+                    let msg = res.data.msg;
+                    if (flag == 0) {
+                        alert("提示：" + msg);
+                    } else {
+                        alert("提示：" + msg);
+                    }
                 });
             }
         },

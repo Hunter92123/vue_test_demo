@@ -15,93 +15,87 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  */
 @TableName("t_emp")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value="TEmp对象", description="")
+@ApiModel(value = "TEmp对象", description = "")
 public class TEmp implements Serializable {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-                        @TableId(value = "id", type = IdType.AUTO)
-                            private Integer id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @TableField("name")
-                private String name;
+    private String name;
 
     @TableField("photo")
-                private String photo;
+    private String photo;
 
     @TableField("age")
-                private Integer age;
+    private Integer age;
 
     @TableField("salary")
-                private Double salary;
+    private Double salary;
 
     @TableField("description")
-                private String description;
-
+    private String description;
 
     public Integer getId() {
-            return id;
-            }
+        return id;
+    }
 
-        public TEmp setId(Integer id) {
-            this.id = id;
-                return this;
-            }
+    public TEmp setId(Integer id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
-            return name;
-            }
+        return name;
+    }
 
-        public TEmp setName(String name) {
-            this.name = name;
-                return this;
-            }
+    public TEmp setName(String name) {
+        this.name = name;
+        return this;
+    }
 
     public String getPhoto() {
-            return photo;
-            }
+        return photo;
+    }
 
-        public TEmp setPhoto(String photo) {
-            this.photo = photo;
-                return this;
-            }
+    public TEmp setPhoto(String photo) {
+        this.photo = photo;
+        return this;
+    }
 
     public Integer getAge() {
-            return age;
-            }
+        return age;
+    }
 
-        public TEmp setAge(Integer age) {
-            this.age = age;
-                return this;
-            }
+    public TEmp setAge(Integer age) {
+        this.age = age;
+        return this;
+    }
 
     public Double getSalary() {
-            return salary;
-            }
+        return salary;
+    }
 
-        public TEmp setSalary(Double salary) {
-            this.salary = salary;
-                return this;
-            }
+    public TEmp setSalary(Double salary) {
+        this.salary = salary;
+        return this;
+    }
 
     public String getDescription() {
-            return description;
-            }
+        return description;
+    }
 
-        public TEmp setDescription(String description) {
-            this.description = description;
-                return this;
-            }
+    public TEmp setDescription(String description) {
+        this.description = description;
+        return this;
+    }
 
-@Override
-public String toString() {
-        return "TEmp{" +
-                "id=" + id +
-                ", name=" + name +
-                ", photo=" + photo +
-                ", age=" + age +
-                ", salary=" + salary +
-                ", description=" + description +
-        "}";
-        }
-        }
+    @Override
+    public String toString() {
+        return "TEmp{" + "id=" + id + ", name=" + name + ", photo=" + photo + ", age=" + age + ", salary=" + salary
+                + ", description=" + description + "}";
+    }
+
+}

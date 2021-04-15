@@ -10,4 +10,19 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ITUserService extends IService<TUser> {
 
+    /**
+     * 检查用户名是否存在
+     *
+     * @param userName
+     * @return
+     */
+    boolean checkUserNameHasExsited(String userName);
+
+    /**
+     * 用户登录方法
+     *
+     * @param user
+     * @return
+     */
+    boolean login(TUser user);
 }

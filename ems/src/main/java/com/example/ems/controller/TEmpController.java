@@ -1,6 +1,5 @@
 package com.example.ems.controller;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user/t-emp")
-    public class TEmpController {
+public class TEmpController {
 
-        }
-
+}

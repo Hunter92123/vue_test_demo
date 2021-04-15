@@ -9,8 +9,8 @@
 	<id>ems</id>
 
 	<classpath>
-		<dir name="/Users/tl/gitprojects/vue_test_demo/ems/target/classes">
-		</dir>
-	</classpath>
+        <dir name="${rebel.projectpath.ems}/target/classes">
+        </dir>
+    </classpath>
 
 </application>

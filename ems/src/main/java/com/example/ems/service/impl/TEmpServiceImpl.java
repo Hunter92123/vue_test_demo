@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
  * @describe 服务实现类
  */
 @Service
-        public class TEmpServiceImpl extends ServiceImpl<TEmpMapper, TEmp> implements ITEmpService {
+public class TEmpServiceImpl extends ServiceImpl<TEmpMapper, TEmp> implements ITEmpService {
 
-        }
+}

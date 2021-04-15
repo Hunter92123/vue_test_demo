@@ -42,14 +42,15 @@ CREATE TABLE `t_emp` (
 DROP TABLE IF EXISTS `t_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `t_user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(20) DEFAULT NULL,
-  `real_name` varchar(20) DEFAULT NULL,
-  `sex` char(1) DEFAULT NULL,
-  `status` char(1) DEFAULT NULL,
-  `register_datetime` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `t_user`(
+                         `id`                int         NOT NULL AUTO_INCREMENT,
+                         `user_name`         varchar(20) NOT NULL,
+                         `real_name`         varchar(20)      DEFAULT NULL,
+                         `password`          varchar(30) NOT NULL,
+                         `sex`               char(1)          DEFAULT NULL,
+                         `status`            char(1)     NOT NULL,
+                         `register_datetime` timestamp   NULL DEFAULT NULL,
+                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

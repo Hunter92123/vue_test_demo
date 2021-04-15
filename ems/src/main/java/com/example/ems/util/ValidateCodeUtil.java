@@ -1,6 +1,5 @@
 package com.example.ems.util;
 
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,7 +9,6 @@ import java.io.Serializable;
 import java.util.Base64;
 import java.util.Random;
 
-
 /**
  * @author chenhx
  * @ClassName: ValidateCodeUtil
@@ -18,17 +16,22 @@ import java.util.Random;
  * @date 2017年11月14日 上午11:00:07
  */
 public class ValidateCodeUtil {
-    private static Validate validate = null;                  //验证码类，用于最后返回此对象，包含验证码图片base64和真值
-    private static Random random = new Random();              //随机类，用于生成随机参数
-    private static String randString = "0123456789abcdefghijkmnpqrtyABCDEFGHIJLMNQRTY" ;//随机生成字符串的取值范围
 
-    private static int width = 80;     //图片宽度
-    private static int height = 34;    //图片高度
-    private static int StringNum = 4;  //字符的数量
-    private static int lineSize = 40;  //干扰线数量
+    private static Validate validate = null; // 验证码类，用于最后返回此对象，包含验证码图片base64和真值
 
+    private static Random random = new Random(); // 随机类，用于生成随机参数
 
-    //将构造函数私有化 禁止new创建
+    private static String randString = "0123456789abcdefghijkmnpqrtyABCDEFGHIJLMNQRTY";// 随机生成字符串的取值范围
+
+    private static int width = 80; // 图片宽度
+
+    private static int height = 34; // 图片高度
+
+    private static int StringNum = 4; // 字符的数量
+
+    private static int lineSize = 40; // 干扰线数量
+
+    // 将构造函数私有化 禁止new创建
     private ValidateCodeUtil() {
         super();
     }
@@ -40,7 +43,7 @@ public class ValidateCodeUtil {
      * @return
      */
     private static String getRandomChar(int index) {
-        //获取指定位置index的字符，并转换成字符串表示形式
+        // 获取指定位置index的字符，并转换成字符串表示形式
         return String.valueOf(randString.charAt(index));
     }
 
@@ -62,7 +65,7 @@ public class ValidateCodeUtil {
      * @return
      */
     private static Font getFont() {
-        return new Font("Fixedsys" , Font.CENTER_BASELINE, 25);  //名称、样式、磅值
+        return new Font("Fixedsys", Font.CENTER_BASELINE, 25); // 名称、样式、磅值
     }
 
     /**
@@ -92,10 +95,10 @@ public class ValidateCodeUtil {
      */
     private static String drawString(Graphics g, String randomString, int i) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setFont(getFont());   //设置字体
-        g2d.setColor(new Color(random.nextFloat(), random.nextFloat(), random.nextFloat()));//设置颜色
+        g2d.setFont(getFont()); // 设置字体
+        g2d.setColor(new Color(random.nextFloat(), random.nextFloat(), random.nextFloat()));// 设置颜色
         String randChar = String.valueOf(getRandomChar(random.nextInt(randString.length())));
-        randomString += randChar;   //组装
+        randomString += randChar; // 组装
         int rot = getRandomNum(5, 10);
         g2d.translate(random.nextInt(3), random.nextInt(3));
         g2d.rotate(rot * Math.PI / 180);
@@ -110,7 +113,7 @@ public class ValidateCodeUtil {
      * @param g
      */
     private static void drawLine(Graphics g) {
-        //起点(x,y)  偏移量x1、y1
+        // 起点(x,y) 偏移量x1、y1
         int x = random.nextInt(width);
         int y = random.nextInt(height);
         int xl = random.nextInt(13);
@@ -130,25 +133,25 @@ public class ValidateCodeUtil {
         // BufferedImage类是具有缓冲区的Image类,Image类是用于描述图像信息的类
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
         Graphics g = image.getGraphics();// 获得BufferedImage对象的Graphics对象
-        g.fillRect(0, 0, width, height);//填充矩形
-        g.setFont(new Font("Times New Roman" , Font.ROMAN_BASELINE, 18));//设置字体
-        g.setColor(getRandColor(110, 133));//设置颜色
-        //绘制干扰线
+        g.fillRect(0, 0, width, height);// 填充矩形
+        g.setFont(new Font("Times New Roman", Font.ROMAN_BASELINE, 18));// 设置字体
+        g.setColor(getRandColor(110, 133));// 设置颜色
+        // 绘制干扰线
         for (int i = 0; i <= lineSize; i++) {
             drawLine(g);
         }
-        //绘制字符
-        String randomString = "" ;
+        // 绘制字符
+        String randomString = "";
         for (int i = 1; i <= StringNum; i++) {
             randomString = drawString(g, randomString, i);
             validate.setValue(randomString);
         }
 
-        g.dispose();//释放绘图资源
+        g.dispose();// 释放绘图资源
         ByteArrayOutputStream bs = null;
         try {
             bs = new ByteArrayOutputStream();
-            ImageIO.write(image, "png" , bs);//将绘制得图片输出到流
+            ImageIO.write(image, "png", bs);// 将绘制得图片输出到流
             String imgsrc = Base64.getEncoder().encodeToString(bs.toByteArray());
             validate.setBase64Str(imgsrc);
         } catch (Exception e) {
@@ -178,9 +181,12 @@ public class ValidateCodeUtil {
      * @date 2017年11月14日 上午11:35:34
      */
     public static class Validate implements Serializable {
+
         private static final long serialVersionUID = 1L;
-        private String Base64Str;        //Base64 值
-        private String value;            //验证码值
+
+        private String Base64Str; // Base64 值
+
+        private String value; // 验证码值
 
         public String getBase64Str() {
             return Base64Str;
@@ -198,14 +204,11 @@ public class ValidateCodeUtil {
             this.value = value;
         }
 
-
         @Override
         public String toString() {
-            return "Validate{" +
-                    "Base64Str='" + Base64Str + '\'' +
-                    ", value='" + value + '\'' +
-                    '}';
+            return "Validate{" + "Base64Str='" + Base64Str + '\'' + ", value='" + value + '\'' + '}';
         }
+
     }
+
 }
- 

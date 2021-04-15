@@ -10,4 +10,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ITEmpService extends IService<TEmp> {
 
-        }
+}

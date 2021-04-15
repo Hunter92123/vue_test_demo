@@ -15,22 +15,23 @@ import java.io.IOException;
 @Configuration
 class MybatisConfig {
 
-    @Value("${mybatis.mapper-locations}" )
-    private String mapperLocations;
+	@Value("${mybatis.mapper-locations}")
+	private String mapperLocations;
 
-    @Bean
-    public SqlSessionFactoryBean configSqlSessionFactoryBean(DataSource dataSource) throws IOException {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
-        // configuration.setLogImpl(StdOutImpl.class);
-        configuration.setLogImpl(NoLoggingImpl.class);
-        configuration.setMapUnderscoreToCamelCase(true);
-        configuration.setCallSettersOnNulls(true);
+	@Bean
+	public SqlSessionFactoryBean configSqlSessionFactoryBean(DataSource dataSource) throws IOException {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+		// configuration.setLogImpl(StdOutImpl.class);
+		configuration.setLogImpl(NoLoggingImpl.class);
+		configuration.setMapUnderscoreToCamelCase(true);
+		configuration.setCallSettersOnNulls(true);
 
-        sqlSessionFactoryBean.setConfiguration(configuration);
-        sqlSessionFactoryBean.setDataSource(dataSource);
-        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(mapperLocations));
-        return sqlSessionFactoryBean;
-    }
+		sqlSessionFactoryBean.setConfiguration(configuration);
+		sqlSessionFactoryBean.setDataSource(dataSource);
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		sqlSessionFactoryBean.setMapperLocations(resolver.getResources(mapperLocations));
+		return sqlSessionFactoryBean;
+	}
+
 }
